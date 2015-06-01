@@ -2,7 +2,6 @@
 # app_id = "c5975da7"
 # app_key = "5cc84166d69454f54ed43fb1bcb9b858
 
-require 'pry'
 class RecipesController < ApplicationController
   def index
     app_id = "c5975da7"
