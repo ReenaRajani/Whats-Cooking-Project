@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
-root :to => 'pages#home'
-get '/recipes' => 'pages#index'
-
-
+root :to => 'recipes#home'
+get '/recipes' => 'recipes#index'
  
 end

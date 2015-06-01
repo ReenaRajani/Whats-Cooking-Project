@@ -1,0 +1,22 @@
+<h1>Recipe Search </h1>
+<p>List of Recipes Found </p>
+
+<% if @recipe_data %>
+  <div class ="section_list">
+
+    <h4> Search Resultsfor keyword <%= @title %> </h4>
+    
+    <ul>
+      <% @recipe_list.each do |details| %>
+     <a href="<%= details['url'] %>"> 
+       <li> <%= details['label'] %> </li>
+       <img src="<%= details['image'] %>">
+       </a>
+      <% end %>
+    </ul>
+
+    
+  </div>
+
+  <% end %>
+      
