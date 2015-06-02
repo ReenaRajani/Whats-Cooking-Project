@@ -33,7 +33,10 @@ class RecipesController < ApplicationController
   def search_results( title = @title )
     if title 
       url = "https://api.edamam.com/search?q=#{ title }&app_id=#{ @app_id }&app_key=#{ @app_key }"
-      @recipe_data = HTTParty.get url if url
+      encoded_url = URI.encode(url.strip)
+      uri = URI.parse(encoded_url)
+      @recipe_data = HTTParty.get uri if uri
+      # @recipe_data = HTTParty.get url if url
       @recipe_list = []
       @recipe_data['hits'].each do |recipe|
         @recipe_list << recipe['recipe']
