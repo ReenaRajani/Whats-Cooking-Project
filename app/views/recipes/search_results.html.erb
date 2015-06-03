@@ -8,7 +8,8 @@
     
     <ul>
       <% @recipe_list.each do |details| %>
-     <a href="<%= details['url'] %>"> 
+      <% binding.pry %>
+       <a href="<%= details['url'] %>"> 
        <li> <%= details['label'] %> </li>
        <img src="<%= details['image'] %>">
        </a>

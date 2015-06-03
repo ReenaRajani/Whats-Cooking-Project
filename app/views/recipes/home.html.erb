@@ -1,11 +1,10 @@
-<h4> Home page contents</h4>
 
 <!-- Search section based on the Recipe Name  -->
 <div class = "section_search">
-  <%= form_tag("/recipes/search" ,method: "get") do %>
-    <%= label_tag(:recipe_name, "Enter the recipe name:") %>
-    <%= text_field_tag(:recipe_name) %>
-    <%= submit_tag("Search Recipe") %>
+  <%= form_tag("/recipes/search" ,method: "get", class: "form-inline") do %>
+    <!-- <%= label_tag(:recipe_name, "Enter the recipe name:") %> -->
+    <%= text_field_tag(:recipe_name ,nil , placeholder: "Search for recipe...") %>
+    <%= submit_tag("Search Recipe" ,class: "btn btn-primary") %> 
   <% end %>
   
 </div>
@@ -13,16 +12,23 @@
 
 
 <!-- Search section based on the Ingredient list  -->
-<div class="section_ingredients_search">
+<div class="input-group input-group-lg">
 
-  <%= form_tag("recipes/search_ingredients", method: "get" ,class: "form_ingredients_search") do %>
-  <%= label_tag(:ingredient1, "ingredient1:") %>
-  <%= text_field_tag(:ingredient1) %>
-   <%= label_tag(:ingredient2, "ingredient2:") %>
-  <%= text_field_tag(:ingredient2) %>
-   <%= label_tag(:ingredient3, "ingredient3:") %>
-  <%= text_field_tag(:ingredient3) %>
-  <%= submit_tag("Search") %>
+  <%= form_tag("recipes/search_ingredients", method: "get" ,class: "form-control") do %>
+
+    <%= label_tag(:ingredient1, "ingredient1:") %>
+    <%= text_field_tag(:ingredient1) %>
+
+
+    <%= label_tag(:ingredient2, "ingredient2:") %>
+    <%= text_field_tag(:ingredient2) %>
+
+
+    <%= label_tag(:ingredient3, "ingredient3:") %>
+    <%= text_field_tag(:ingredient3) %>
+
+   
+  <%= submit_tag("Search" ,class: "btn btn-primary") %>
 <% end %>
   
 </div>

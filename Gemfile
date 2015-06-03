@@ -32,6 +32,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'remove_turbolinks'
 gem 'httparty'
+gem 'bootstrap-sass', '~> 3.3.4'
+gem 'seed_dump'
 group :development do
   gem 'pry-rails'
   gem 'pry-stack_explorer'
