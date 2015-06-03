@@ -33,7 +33,31 @@
   
 </div>
 
+<div class="search_by_category">
 
+  <%= select_tag(:diet_id, options_for_select([
+    ['No-sugar', 1], 
+    ['Vegetarian', 2],
+    ['Vegan', 3] ,
+    ['Paleo', 4] ,
+    ['Gluten-free', 5] ,
+    ['Wheat-free', 6] ,
+    ['Paleo', 7] ,
+    ['Egg-Free', 8], 
+    ['Tree-Nut-Free', 9],
+    ['Alcohol-free', 10],
+    ['No oil added', 11], 
+    ['Peanut-Free', 12],
+    ['Shellfish-Free', 13] ,
+    ['Fish-Free', 14] ,
+    ['Soy-Free', 15] ,
+    ['Dairy-Free', 16]
+    ])
+)%>
+
+<%= f.select(:city_id) do %>
+
+</div>
 
 
 

@@ -6,7 +6,6 @@ class RecipesController < ApplicationController
   
    before_filter :setup_keys
   
- 
 
   #  Search based on the recipe name 
   # gets the recipename as input and then calls the search_results function
@@ -20,25 +19,27 @@ class RecipesController < ApplicationController
   def multiple_ingredients_search
     @title = params[:ingredient1],params[:ingredient2],params[:ingredient3]
     search_results(@title)
-    # binding.pry
   end
 
 
-#Search the results based on the arg title, which is either the recipe name or the listof ingredients
+
+# Search the results based on the arg title, which is either the recipe name or the list of ingredients
 # This is where we display the results
 #sets the url and the HTTParty generates the url . results are fed in to the recipelist and the search results page is displayed
+# due to the problem in heroku had to encode and parse the url 
+
   def search_results( title = @title )
     if title 
       setup_keys()
-      url = "https://api.edamam.com/search?q=#{ title }&app_id=#{ @app_id }&app_key=#{ @app_key }"
-      encoded_url = URI.encode(url.strip)
-      uri = URI.parse(encoded_url)
-      @recipe_data = HTTParty.get uri if uri
-      @recipe_list = []
-      @recipe_data['hits'].each do |recipe|
-        @recipe_list << recipe['recipe']
-        add_to_database(recipe)
-      end
+     
+      # if present in db , then 
+     recipe_result = Recipe.find_by(:title => title)
+      if recipe_result.nil?
+        @recipes = fetch_from_api( title )
+      else
+        @recipes = Recipe.where("title = ?", title)
+      end 
+
       render "recipes/search_results"
     end
   end
@@ -54,14 +55,22 @@ class RecipesController < ApplicationController
       @app_id = "c5975da7"
       @app_key = "5cc84166d69454f54ed43fb1bcb9b858"
     end
-    def recipe_params
-      params.require(:recipe).permit(:title, :image_url, :source_url , :edamaam_uri , :summary , :total_time , :prep_time , :cooking_time, :no_of_serves , :rating ,  :difficulty_level , :ingredient_lines)
+  
+    def fetch_from_api (title)
+      url = "https://api.edamam.com/search?q=#{ title }&app_id=#{ @app_id }&app_key=#{ @app_key }"
+      encoded_url = URI.encode(url.strip)
+      uri = URI.parse(encoded_url)
+      @recipe_data = HTTParty.get uri if uri
+      # @recipe_list = []
+      @recipes = []
+      @recipe_data['hits'].each do |recipe|
+        # @recipe_list << recipe['recipe']
+        @recipes << add_to_database(recipe)
+        end
+      @recipes
     end
 
-    def diet_params
-      params.require(:diet).permit(:diet_type)
-    end
-
+    # adding contents to the database tables recipe and to the diet 
     def add_to_database( recipe )
       recipe_db = Recipe.create(
         :title => recipe["recipe"]["label"],
@@ -78,10 +87,23 @@ class RecipesController < ApplicationController
         :ingredient_lines => recipe["recipe"]["ingredientLines"].join(", ")
       )
       recipe["recipe"]["healthLabels"].each do |type|
-      diet_db = Diet.create(
-        :diet_type => type)
+        @diet = Diet.find_by(:diet_type => type)
+        if @diet.nil?
+          @diet = Diet.create(:diet_type => type)
+        end 
+        recipe_db.diets << @diet # guarantted to be in the DB
       end 
 
-    end 
+      recipe_db
+    end
+
+    # for future uses , currently not used 
+    def recipe_params
+      params.require(:recipe).permit(:title, :image_url, :source_url , :edamaam_uri , :summary , :total_time , :prep_time , :cooking_time, :no_of_serves , :rating ,  :difficulty_level , :ingredient_lines)
+    end
+
+    def diet_params
+      params.require(:diet).permit(:diet_type)
+    end
 
 end

@@ -1,23 +1,21 @@
 <!-- Display Page for the recipes found based on the results -->
 <p>List of Recipes Found </p>
 
-<% if @recipe_data %>
   <div class ="section_list">
 
     <h4> Search Resultsfor keyword <%= @title %> </h4>
     
     <ul>
-      <% @recipe_list.each do |details| %>
-      <% binding.pry %>
-       <a href="<%= details['url'] %>"> 
-       <li> <%= details['label'] %> </li>
-       <img src="<%= details['image'] %>">
+      <% @recipes.each do |recipe| %>
+       <a href="<%= recipe.source_url %>"> 
+       <li> <%= recipe.title %> </li>
+       <img src="<%= recipe.image_url %>">
        </a>
       <% end %>
     </ul>
-
-    
+  
   </div>
 
-  <% end %>
       
+
+    </ul>
