@@ -1,11 +1,26 @@
 <% provide(:title, @user.full_name) %>
 <div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.full_name %>
-      </h1>
-    </section>
-  </aside>
+  <div class="box">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <h1>
+          <%= gravatar_for @user %>
+          <%= @user.full_name %>
+        </h1>
+      </section>
+    </aside>
+  </div>
+
+      <h3 class="intro-text text-center">My Favorites </h3>
+      <% @user.recipes.each do |recipe| %>
+        <div class="col-sm-4 text-center">
+            <a href="<%= recipe.source_url %>"> 
+             <img class="img-responsive img-circle" src="<%= recipe.image_url %>" alt="">
+              <small><%= recipe.title %></small>
+              </a>
+           </div>
+         <% end %>
+             
+           <div class="row">
+    </div>
 </div>

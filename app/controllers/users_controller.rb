@@ -44,6 +44,12 @@ class UsersController < ApplicationController
   end
 
 
+  def favorite
+   user = @current_user
+   user.recipes << Recipe.find(params[:recipeid])
+  end 
+
+
   private 
   def user_params
     params.require(:user).permit(:full_name,:email_id,:password ,:password_confirmation)

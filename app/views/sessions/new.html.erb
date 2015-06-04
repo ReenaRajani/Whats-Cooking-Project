@@ -1,14 +1,17 @@
 <% provide(:title, "Log in") %>
 
 <div class="row">
-    <div class="col-md-3 col-md-offset-5">
+    <div class="col-md-4 col-md-offset-5">
 
       <%= form_for(:session, url: login_path , class: "form-signin form-horizontal") do |f| %>
+      
       <h2 class="form-signin-heading">Log in</h2>
+        
         <div class="form-group">
           <%= f.label :email_id , class: "sr-only" %>
           <%= f.text_field :email_id , class: 'form-control' , placeholder: "Email address" ,required: "" , autofocus: ""%>
         </div>
+        
         <div class="form-group">
           <%= f.label :password  , class: "sr-only" %>
           <%= f.password_field :password , class: 'form-control' , placeholder: "Password" , required: "" %>

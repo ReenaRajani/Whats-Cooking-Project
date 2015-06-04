@@ -35,5 +35,6 @@ resources :users, :except => [:edit] do
     end
   end
 
-get '/users/favorites' => 'users#setfav'
+post 'users/favorite' => 'users#favorite'
+
 end
