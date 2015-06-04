@@ -8,11 +8,62 @@
 </head>
 <body>
   <div class="container">
-    <div class="section_header">
-      <img src="http://cdn.marketplaceimages.windowsphone.com/v8/images/c51f2b5a-7e66-4563-986d-20ac630ac7ee?imageType=ws_icon_large" alt="whats cooking">
-      <h1> What's Cooking </h1>
+
+    <div class="row">
+    <!--   <div class="col-md-5"> -->
+
+        <!-- Search section based on the Ingredient list  -->
+        <div class="input-group input-group-lg">
+
+          <%= form_tag("recipes/search_ingredients", method: "get" ,class: "form-control") do %>
+
+            <%= label_tag(:ingredient1, "ingredient1:") %>
+            <%= text_field_tag(:ingredient1) %>
+
+
+            <%= label_tag(:ingredient2, "ingredient2:") %>
+            <%= text_field_tag(:ingredient2) %>
+
+
+            <%= label_tag(:ingredient3, "ingredient3:") %>
+            <%= text_field_tag(:ingredient3) %>
+
+
+          <%= select_tag(:diet, options_for_select([
+            ['No-sugar'], 
+            ['Vegetarian'],
+            ['Vegan'],
+            ['Paleo'],
+            ['Gluten-free'],
+            ['Wheat-free'],
+            ['Paleo'],
+            ['Egg-Free'],
+            ['Tree-Nut-Free'],
+            ['Alcohol-free'],
+            ['No oil added'],
+            ['Peanut-Free'],
+            ['Shellfish-Free'],
+            ['Fish-Free'],
+            ['Soy-Free'],
+            ['Dairy-Free'],
+            ]), :include_blank => true
+        )%>
+           
+          <%= submit_tag("Search" ,class: "btn btn-primary") %>
+        <% end %>
+          
+        </div>
+        
+<!--       </div> -->
     </div>
+    
     <div class="navbar navbar-fixed-top navbar-inverse">
+       <!--    <div class="section_header">
+          <img src="http://cdn.marketplaceimages.windowsphone.com/v8/images/c51f2b5a-7e66-4563-986d-20ac630ac7ee?imageType=ws_icon_large" alt="whats cooking">
+          <h1> What's Cooking </h1>
+        </div>
+ -->
+
       <ul>
         <li><%= link_to "Home", root_path %></li>
       </ul>
@@ -23,6 +74,7 @@
       <% if  @current_user.present? %>
         <li> <%= link_to('Edit Profile' ,edit_users_path) %></li>
         <li> <%= link_to("log out #{@current_user.full_name}",login_path, :method => :delete, :confirm => 'Are you sure?') %></li>
+        <li> <%= link_to('My favorites' ,edit_users_path) %></li>
         <% else  %>
       <li> <%= link_to('Sign Up' ,new_user_path) %></li>
       <li> <%= link_to('Log in', login_path) %></li>

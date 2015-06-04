@@ -20,5 +20,7 @@ class User < ActiveRecord::Base
   validates :email_id, :presence => true , length: { maximum: 255 } , format: { with: VALID_EMAIL_REGEX },  uniqueness: true
   has_secure_password
   validates :password, length: { minimum: 4 }
+
+  has_and_belongs_to_many :recipes
 end
 
