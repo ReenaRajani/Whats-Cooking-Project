@@ -9,9 +9,24 @@
 
 Rails.application.routes.draw do
 
+  get 'sessions/new'
+
 root :to => 'recipes#home'
 get '/recipes/search' => 'recipes#search_recipes'
 get '/recipes/search_ingredients' => 'recipes#multiple_ingredients_search'
 get '/recipes/search_results' => 'recipes#search_results', :as => "search_results"
+
+get '/users/new' => 'users#new'
+post '/users' => 'users#create'
+get '/users/:id' => 'users#show' , :as => 'user'
+get '/users/:id/edit' => 'users#edit' , :as => 'user_edit'
+post '/users/:id' => 'users#update'
+
+
+resources :users , :except => [:edit , :show] do
+  collection do 
+    get '/edit' => 'users#edit'
+  end
+end
 
 end

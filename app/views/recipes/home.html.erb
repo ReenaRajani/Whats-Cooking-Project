@@ -1,4 +1,6 @@
 
+  <%= link_to "Sign up now!", new_user_path, class: "btn btn-lg btn-primary" %>
+
 <!-- Search section based on the Recipe Name  -->
 <div class = "section_search">
   <%= form_tag("/recipes/search" ,method: "get", class: "form-inline") do %>
@@ -55,7 +57,7 @@
     ])
 )%>
 
-<%= f.select(:city_id) do %>
+
 
 </div>
 
