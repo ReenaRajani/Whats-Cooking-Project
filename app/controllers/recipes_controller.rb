@@ -17,17 +17,15 @@ class RecipesController < ApplicationController
 # search based on the ingredient(s)
 # title will be a csv of ingredients got as an input from the user 
   def multiple_ingredients_search
-    # binding.pry
     unless params[:diet].empty?
       diet = Diet.where( :diet_type => params[:diet] )[0]
       # If this is nil
-        # Go to the api
+        # Go to the api yet to implement
       recipes = diet.recipes
     end
     @ingredients = [params[:ingredient1],params[:ingredient2],params[:ingredient3]].flatten.compact.delete_if(&:empty?)
 
     @title = @ingredients.flatten.compact.delete_if(&:empty?).join(',')
-    # binding.pry
     if recipes.nil?
       search_results(@title)
     else
@@ -44,9 +42,6 @@ class RecipesController < ApplicationController
 
   def search_results( title = @title, recipes = Recipe.all )
 
-    # binding.pry
-
-    # binding.pry
     if title 
       setup_keys()
      
@@ -81,10 +76,10 @@ class RecipesController < ApplicationController
       encoded_url = URI.encode(url.strip)
       uri = URI.parse(encoded_url)
       @recipe_data = HTTParty.get uri if uri
-      # @recipe_list = []
+      
       @recipes = []
       @recipe_data['hits'].each do |recipe|
-        # @recipe_list << recipe['recipe']
+    
         @recipes << add_to_database(recipe)
         end
       @recipes
@@ -111,7 +106,7 @@ class RecipesController < ApplicationController
         if @diet.nil?
           @diet = Diet.create(:diet_type => type)
         end 
-        recipe_db.diets << @diet # guarantted to be in the DB
+        recipe_db.diets << @diet # guaranteed to be in the DB
       end 
 
       recipe_db

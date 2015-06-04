@@ -1,28 +1,25 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+What's Cooking !!!
 
-Things you may want to cover:
+The Project is about a search site for the recipes and if the user is logged in, he/she can favorite the recipes in their page. 
+The user can also search the recipe based on the Diet type.
 
-* Ruby version
+This is built using ruby 2.2.2p95 and Rails 4.2.1 and the DB used is Postgres 
+External Api is used for the search of the recipes. 
+Styling is done using bootstrap
 
-* System dependencies
+There is no test suite for this projet . 
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The key models are the Recipes , Users and the Diets 
 
 
-Please feel free to use a different markup language if you do not plan to run
+Future Considerations :
+  
+  * Favorites and unfavorite 
+  * Improved search category when using multiple ingredients
+  * Better display feature
+  * User can add reviews/Notes on the recipe
+  * Users can add their own recipes 
+
 <tt>rake doc:app</tt>.
