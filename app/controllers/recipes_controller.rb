@@ -17,8 +17,22 @@ class RecipesController < ApplicationController
 # search based on the ingredient(s)
 # title will be a csv of ingredients got as an input from the user 
   def multiple_ingredients_search
-    @title = params[:ingredient1],params[:ingredient2],params[:ingredient3]
-    search_results(@title)
+    # binding.pry
+    unless params[:diet].empty?
+      diet = Diet.where( :diet_type => params[:diet] )[0]
+      # If this is nil
+        # Go to the api
+      recipes = diet.recipes
+    end
+    @ingredients = [params[:ingredient1],params[:ingredient2],params[:ingredient3]].flatten.compact.delete_if(&:empty?)
+
+    @title = @ingredients.flatten.compact.delete_if(&:empty?).join(',')
+    # binding.pry
+    if recipes.nil?
+      search_results(@title)
+    else
+      search_results(@title, recipes)
+    end
   end
 
 
@@ -28,16 +42,20 @@ class RecipesController < ApplicationController
 #sets the url and the HTTParty generates the url . results are fed in to the recipelist and the search results page is displayed
 # due to the problem in heroku had to encode and parse the url 
 
-  def search_results( title = @title )
+  def search_results( title = @title, recipes = Recipe.all )
+
+    # binding.pry
+
+    # binding.pry
     if title 
       setup_keys()
      
       # if present in db , then 
-     recipe_result = Recipe.find_by(:title => title)
+     recipe_result = recipes.find_by(:title => title)
       if recipe_result.nil?
         @recipes = fetch_from_api( title )
       else
-        @recipes = Recipe.where("title = ?", title)
+        @recipes = recipes.where("title = ?", title)
       end 
 
       render "recipes/search_results"

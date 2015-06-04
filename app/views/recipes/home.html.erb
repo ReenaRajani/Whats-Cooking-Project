@@ -1,5 +1,5 @@
 
-  <%= link_to "Sign up now!", new_user_path, class: "btn btn-lg btn-primary" %>
+  <%= link_to "Sign up now!", users_new_path, class: "btn btn-lg btn-primary" %>
 
 <!-- Search section based on the Recipe Name  -->
 <div class = "section_search">
@@ -29,6 +29,26 @@
     <%= label_tag(:ingredient3, "ingredient3:") %>
     <%= text_field_tag(:ingredient3) %>
 
+
+  <%= select_tag(:diet, options_for_select([
+    ['No-sugar'], 
+    ['Vegetarian'],
+    ['Vegan'],
+    ['Paleo'],
+    ['Gluten-free'],
+    ['Wheat-free'],
+    ['Paleo'],
+    ['Egg-Free'],
+    ['Tree-Nut-Free'],
+    ['Alcohol-free'],
+    ['No oil added'],
+    ['Peanut-Free'],
+    ['Shellfish-Free'],
+    ['Fish-Free'],
+    ['Soy-Free'],
+    ['Dairy-Free'],
+    ]), :include_blank => true
+)%>
    
   <%= submit_tag("Search" ,class: "btn btn-primary") %>
 <% end %>
@@ -37,25 +57,7 @@
 
 <div class="search_by_category">
 
-  <%= select_tag(:diet_id, options_for_select([
-    ['No-sugar', 1], 
-    ['Vegetarian', 2],
-    ['Vegan', 3] ,
-    ['Paleo', 4] ,
-    ['Gluten-free', 5] ,
-    ['Wheat-free', 6] ,
-    ['Paleo', 7] ,
-    ['Egg-Free', 8], 
-    ['Tree-Nut-Free', 9],
-    ['Alcohol-free', 10],
-    ['No oil added', 11], 
-    ['Peanut-Free', 12],
-    ['Shellfish-Free', 13] ,
-    ['Fish-Free', 14] ,
-    ['Soy-Free', 15] ,
-    ['Dairy-Free', 16]
-    ])
-)%>
+
 
 
 

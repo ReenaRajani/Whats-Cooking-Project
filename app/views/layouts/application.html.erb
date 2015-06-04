@@ -12,6 +12,23 @@
       <img src="http://cdn.marketplaceimages.windowsphone.com/v8/images/c51f2b5a-7e66-4563-986d-20ac630ac7ee?imageType=ws_icon_large" alt="whats cooking">
       <h1> What's Cooking </h1>
     </div>
+    <div class="navbar navbar-fixed-top navbar-inverse">
+      <ul>
+        <li><%= link_to "Home", root_path %></li>
+      </ul>
+
+      <% if @current_user.present? && @current_user.admin? %>
+          <li> <%=link_to('Show Users' ,users_path) %> </li>
+        <% end %>
+      <% if  @current_user.present? %>
+        <li> <%= link_to('Edit Profile' ,user_edit) %></li>
+        <li> <%= link_to("log out #{@current_user.full_name}",login_path, :method => :delete, :confirm => 'Are you sure?') %></li>
+        <% else  %>
+      <li> <%= link_to('Sign Up' ,users_new_path) %></li>
+      <li> <%= link_to('Log in', login_path) %></li>
+      <% end %>
+      
+    </div>
     <div class="section_content">
         <p> Your food forage ends here </p>
         
