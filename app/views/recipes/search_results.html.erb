@@ -5,6 +5,17 @@
 
     <h4> Search Resultsfor keyword <%= @title %> </h4>
     
+    <% @recipes.each do |recipe| %>
+      <div><img src="<%= recipe.image_url %>"></div>
+    <% end %>
+    <%# will_paginate @recipes %>
+
+
+
+
+
+
+
     <ul>
       <% @recipes.each do |recipe| %>
        <a href="<%= recipe.source_url %>"> 
@@ -13,9 +24,7 @@
        </a>
       <% end %>
     </ul>
+    
   
   </div>
 
-      
-
-    </ul>
