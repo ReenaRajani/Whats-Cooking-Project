@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     
     if @user.save
 
-      session[:user_id] = @                                                       user.id
+      session[:user_id] = @user.id
       flash[:success] = "Welcome to the What's Cooking App!"
       redirect_to @user
     else
@@ -24,20 +24,24 @@ class UsersController < ApplicationController
     end 
   end
 
-
   def edit
     @user = @current_user
-    render :new
+    # render :new
   end
 
   def update
     user = @current_user
-    user.update user_params
-    redirect_to root_path
+     if user.update ( user_params) 
+       redirect_to root_path
+     else 
+      render :edit
+    end
 
   end
 
+  def show
 
+  end
 
 
   private 
