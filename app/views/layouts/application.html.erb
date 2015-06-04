@@ -7,7 +7,125 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="container">
+  <!--  Display Feature try out  -->
+<div class="brand">What's Cooking</div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">
+            <img class="img-responsive" alt="Brand" src="http://cdn.scrapbook.com/products/cache/SBC_fab-dc47021_0.jpg"> 
+          </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"> <%= link_to "Home", root_path %> </li>
+            <!-- If Admin user , Display List of users -->
+            <% if @current_user.present? && @current_user.admin? %>
+                  <li> <%=link_to('Show Users' ,users_path) %> </li>
+            <% end %>
+
+            <!-- If the user had logged on  -->
+            <% if  @current_user.present? %>
+                <li> <%= link_to('Edit Profile' ,edit_users_path) %> </li>
+                <li> <%= link_to("log out #{@current_user.full_name}",login_path, :method => :delete, :confirm => 'Are you sure?') %></li>
+                <li> <%= link_to('My favorites' ,edit_users_path) %></li>
+
+              <!-- if the user has not logged on   -->
+             <% else  %>
+                 <li> <%= link_to('Sign Up' , new_user_path) %></li>
+                 <li> <%= link_to('Log in', login_path) %></li>
+             <% end %>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+              <div class="form-group">
+                  <%= form_tag("/recipes/search" ,method: "get", class: "navbar-form navbar-right") do %>
+                      <%= text_field_tag(:recipe_name ,nil , placeholder: "Search for recipe...", class: "form-control") %>
+                      <%= submit_tag("Search" ,class: "btn btn-primary" ) %> 
+                  <% end %>
+              </div>
+              </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+ <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+    <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+              <li class="sidebar-brand">
+                    <a href="#">
+                        What's Cooking
+                    </a>
+                </li>
+                <!-- Search section based on the Ingredient list  -->
+        <div class="input-group input-group-lg">
+
+          <%= form_tag("recipes/search_ingredients", method: "get" ,class: "form-control") do %>
+          
+
+            <%= label_tag(:ingredient1, "ingredient1:") %>
+            <%= text_field_tag(:ingredient1) %>
+
+
+            <%= label_tag(:ingredient2, "ingredient2:") %>
+            <%= text_field_tag(:ingredient2) %>
+
+
+            <%= label_tag(:ingredient3, "ingredient3:") %>
+            <%= text_field_tag(:ingredient3) %>
+
+
+          <%= select_tag(:diet, options_for_select([
+            ['No-sugar'], 
+            ['Vegetarian'],
+            ['Vegan'],
+            ['Paleo'],
+            ['Gluten-free'],
+            ['Wheat-free'],
+            ['Paleo'],
+            ['Egg-Free'],
+            ['Tree-Nut-Free'],
+            ['Alcohol-free'],
+            ['No oil added'],
+            ['Peanut-Free'],
+            ['Shellfish-Free'],
+            ['Fish-Free'],
+            ['Soy-Free'],
+            ['Dairy-Free'],
+            ]), :include_blank => true
+        )%>
+           
+          <%= submit_tag("Search" ,class: "btn btn-primary") %>
+        <% end %>
+          
+        </div>
+        
+<!--       </div> -->
+            </ul>
+        </div>
+
+    <div class="container">
+        <p> Your food forage ends here </p>
+        
+         <%= yield %>
+         
+    </div>
+
+
+        
+<i class="fa fa-search"></i>
+
+
+<!-- End of Try out  -->
+
+ <!--  <div class="container">
   <div class="section_header">
           <img src="http://cdn.marketplaceimages.windowsphone.com/v8/images/c51f2b5a-7e66-4563-986d-20ac630ac7ee?imageType=ws_icon_large" alt="whats cooking">
           <h1> What's Cooking </h1>
@@ -15,34 +133,7 @@
 
     <div class="navbar navbar-fixed-top navbar-inverse">
   
-
-
-      <ul>
-        <li><%= link_to "Home", root_path %></li>
-      </ul>
-
-      <% if @current_user.present? && @current_user.admin? %>
-          <li> <%=link_to('Show Users' ,users_path) %> </li>
-        <% end %>
-      <% if  @current_user.present? %>
-        <li> <%= link_to('Edit Profile' ,edit_users_path) %></li>
-        <li> <%= link_to("log out #{@current_user.full_name}",login_path, :method => :delete, :confirm => 'Are you sure?') %></li>
-        <li> <%= link_to('My favorites' ,edit_users_path) %></li>
-        <% else  %>
-      <li> <%= link_to('Sign Up' ,new_user_path) %></li>
-      <li> <%= link_to('Log in', login_path) %></li>
-      <% end %>
-      
-    </div>
-    <div class="section_content">
-        <p> Your food forage ends here </p>
-        
-         <%= yield %>
-         
-    </div>
-
-  </div>
-  
+   -->
 
 </body>
 </html>

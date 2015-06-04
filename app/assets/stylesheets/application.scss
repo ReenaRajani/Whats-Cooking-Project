@@ -1,2 +1,20 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.btn-primary {
+  background-color: #7529A9;
+  border-color: #4D2D86;
+}
+
+.navbar-inverse .navbar-nav  {
+background-color: rgba(88, 38, 76, 0.86);
+
+}
+.navbar-brand {
+    max-width: 20%;
+}
+
+.container > .navbar-header {
+  height: 55px;
+
+}

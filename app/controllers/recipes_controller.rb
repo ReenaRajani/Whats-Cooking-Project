@@ -57,7 +57,7 @@ class RecipesController < ApplicationController
         @recipes = fetch_from_api( title )
       else
 
-        @recipes = recipes.where("title = ?", title).paginate(:per_page => 6, :page => params[:page])
+        @recipes = recipes.where("title = ?", title)
       end 
 
       render "recipes/search_results"
