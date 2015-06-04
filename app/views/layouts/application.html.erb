@@ -56,84 +56,95 @@
       </div>
     </nav>
 
- <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-    <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-              <li class="sidebar-brand">
-                    <a href="#">
-                        What's Cooking
-                    </a>
-                </li>
-                <!-- Search section based on the Ingredient list  -->
-        <div class="input-group input-group-lg">
+<div class="row">
+  <div class="col-lg-3 col-md-3 ">
+    <div id="wrapper">
+     <!-- Sidebar Menu Items  -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+            <a href="#"> What's Cooking </a>
+          </li>   
+         <!-- Search based on the Ingredient list  -->
+          <%= form_tag("recipes/search_ingredients", method: "get" ,class: "form-horizontal") do %>
 
-          <%= form_tag("recipes/search_ingredients", method: "get" ,class: "form-control") do %>
-          
+              <h3 class="form-signin-heading"> Search by Ingredients</h3>
+              
+              <div class="form-group">
+                <%= text_field_tag(:ingredient1, nil ,placeholder: "Ingredient 1") %>
+              </div>
 
-            <%= label_tag(:ingredient1, "ingredient1:") %>
-            <%= text_field_tag(:ingredient1) %>
+              <div class="form-group">
+                <%= text_field_tag(:ingredient2, nil ,placeholder: "Ingredient 2") %>
+              </div>
 
+              <div class="form-group">
+                <%= text_field_tag(:ingredient3, nil ,placeholder: "Ingredient 3") %>
+              </div>
 
-            <%= label_tag(:ingredient2, "ingredient2:") %>
-            <%= text_field_tag(:ingredient2) %>
-
-
-            <%= label_tag(:ingredient3, "ingredient3:") %>
-            <%= text_field_tag(:ingredient3) %>
-
-
-          <%= select_tag(:diet, options_for_select([
-            ['No-sugar'], 
-            ['Vegetarian'],
-            ['Vegan'],
-            ['Paleo'],
-            ['Gluten-free'],
-            ['Wheat-free'],
-            ['Paleo'],
-            ['Egg-Free'],
-            ['Tree-Nut-Free'],
-            ['Alcohol-free'],
-            ['No oil added'],
-            ['Peanut-Free'],
-            ['Shellfish-Free'],
-            ['Fish-Free'],
-            ['Soy-Free'],
-            ['Dairy-Free'],
-            ]), :include_blank => true
-        )%>
-           
-          <%= submit_tag("Search" ,class: "btn btn-primary") %>
-        <% end %>
-          
+              <div class="form-group">
+              <%= select_tag(:diet, options_for_select([
+                ['No-sugar'], 
+                ['Vegetarian'],
+                ['Vegan'],
+                ['Paleo'],
+                ['Gluten-free'],
+                ['Wheat-free'],
+                ['Paleo'],
+                ['Egg-Free'],
+                ['Tree-Nut-Free'],
+                ['Alcohol-free'],
+                ['No oil added'],
+                ['Peanut-Free'],
+                ['Shellfish-Free'],
+                ['Fish-Free'],
+                ['Soy-Free'],
+                ['Dairy-Free'],
+                ]), :include_blank => true
+            )%>
+             </div>
+               
+              <%= submit_tag("Search" ,class: "btn btn-primary") %>
+            <% end %>
+          </ul>
         </div>
-        
-<!--       </div> -->
-            </ul>
+      </div>
+    </div>
+  <div class="row">
+    <div class="col-lg-7 col-md-7 ">
+      <!-- Page Content -->
+        <div id="page-content-wrapper">
+          <div class="container-fluid">
+              <div class="row">
+                 <div class="col-lg-12">
+                    <p> Your food forage ends here </p>
+                        <%= yield %>
+                  </div>
+               </div>
+          </div>
         </div>
-
-    <div class="container">
-        <p> Your food forage ends here </p>
-        
-         <%= yield %>
-         
+        <!-- /#page-content-wrapper -->
+      </div>
     </div>
 
 
-        
-<i class="fa fa-search"></i>
-
 
 <!-- End of Try out  -->
-
- <!--  <div class="container">
-  <div class="section_header">
-          <img src="http://cdn.marketplaceimages.windowsphone.com/v8/images/c51f2b5a-7e66-4563-986d-20ac630ac7ee?imageType=ws_icon_large" alt="whats cooking">
-          <h1> What's Cooking </h1>
-        </div>
-
-    <div class="navbar navbar-fixed-top navbar-inverse">
-  
-   -->
+     
 
 </body>
 </html>
+
+
+<!-- 
+http://www.foodwise.com.au/wp-content/uploads/2012/10/ChoppingBoard2.gif
+http://th05.deviantart.net/fs11/PRE/i/2006/255/f/7/Chopping_Board___stock_by_stillwater__stock.jpg
+
+body {
+ 
+   
+  background-image: url("http://www.shutterstock.com/blog/wp-content/uploads/sites/5/2013/05/shutterstock_83564761.jpg");
+  background-position: cover;
+  background-repeat: no-repeat;
+}
+ -->
