@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   def new
   end
+  
   def create
     user = User.find_by :email_id => params[:session][:email_id].downcase
     if user.present? && user.authenticate(params[:session][:password])
