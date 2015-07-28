@@ -1,8 +1,4 @@
 <!-- Display Page for the recipes found based on the results -->
-<p>List of Recipes Found </p>
-
-
-
 <div class="row">
   <div class="box">
     <div class="col-lg-12">
@@ -18,7 +14,7 @@
     </div>
       <% @recipes.each do |recipe| %>
          <div class="col-sm-4 text-center">
-            <a href="<%= recipe.source_url %>"> 
+            <a href="<%= recipe.source_url %>" target="_blank"> 
               <img class="img-responsive img-rounded" src="<%= recipe.image_url %>" alt="">
               <small><%= recipe.title %></small>
               <% if  @current_user.present? %>

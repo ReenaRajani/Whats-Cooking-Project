@@ -1,6 +1,6 @@
 == README
 
-What's Cooking !!!
+==What's Cooking !!!
 
 The Project is about a search site for the recipes and if the user is logged in, he/she can favorite the recipes in their page. 
 The user can also search the recipe based on the Diet type.
@@ -14,7 +14,7 @@ There is no test suite for this projet .
 The key models are the Recipes , Users and the Diets 
 
 
-Future Considerations :
+==Future Considerations :
   
   * Favorites and unfavorite 
   * Improved search category when using multiple ingredients
